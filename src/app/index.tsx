@@ -1,62 +1,17 @@
-import {View,Text,StyleSheet}from 'react-native'
+import { Redirect, router } from "expo-router";
+import { onAuthStateChanged } from "firebase/auth";
 
+import { auth } from "../config";
+import { useEffect } from "react";
 const Index=():JSX.Element=>{
-    return(
-        <View style={styles.container}>
-           <View>
-                <View>
-                    <Text>Memo App</Text>
-                    <Text>ログアウト</Text>
-                </View>
-           </View>
-           <View>
-
-                <View>
-                    <View>
-                        <Text>買い物リスト</Text>
-                        <Text>2023年10月1日　10:00</Text>
-                    </View>
-                    <View>
-                        <Text>X</Text>
-                    </View>
-                </View>
-
-                <View>
-                    <View>
-                        <Text>買い物リスト</Text>
-                        <Text>2023年10月1日　10:00</Text>
-                    </View>
-                    <View>
-                        <Text>X</Text>
-                    </View>
-                </View>
-
-                <View>
-                    <View>
-                        <Text>買い物リスト</Text>
-                        <Text>2023年10月1日　10:00</Text>
-                    </View>
-                    <View>
-                        <Text>X</Text>
-                    </View>
-                </View>
-           </View>
-           <View>
-                <Text>
-                    +
-                </Text>
-           </View>
-        </View>
-    )
+    useEffect(()=>{
+        onAuthStateChanged(auth,(user)=>{
+            if(user!==null){
+                router.replace('/memo/list')
+            }
+        })
+    },[])
+    return<Redirect href='auth/log_in' />
 }
-
-const styles = StyleSheet.create({
-    container:{
-        flex:1,
-        justifyContent:'center',
-        alignItems:'center',
-
-    }
-})
 
 export default Index
