@@ -26,11 +26,10 @@ const List=():JSX.Element=>{
     useEffect(()=>{
         if(auth.currentUser===null){return}
         const ref=collection(db,`users/${auth.currentUser.uid}/memos`)
-        const q=query(ref,orderBy('updatedAt','desc'))
+        const q=query(ref,orderBy('updatedAt','asc'))
         const unsubscribe=onSnapshot(q,(snapshot)=>{
             const remoteMemos:Memo[]=[]
             snapshot.forEach((doc)=>{
-                console.log('memo',doc.data())
                 const {bodyText,updatedAt}=doc.data()
                 remoteMemos.push({
                     id:doc.id,
