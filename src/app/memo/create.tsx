@@ -1,5 +1,6 @@
-import {View,TextInput,StyleSheet,KeyboardAvoidingView}from'react-native'
+import {View,TextInput,StyleSheet}from'react-native'
 
+import KeyboardAvoidingView from '../../components/KeyboardAvoidingView'
 import CircleButton from '../../components/CircleButton'
 import Icon from '../../components/Icon'
 import { router } from 'expo-router'
@@ -24,9 +25,9 @@ const handlePress=(bodyText:string):void=>{
 const Create=():JSX.Element=>{
     const [bodyText,setBodyText]=useState('')
     return(
-        <KeyboardAvoidingView behavior='height'style={styles.container}>
+        <KeyboardAvoidingView style={styles.container}>
             <View style={styles.inputContainer}>
-                <TextInput multiline style={styles.input} value={bodyText} onChangeText={(text)=>{setBodyText(text)}}/>
+                <TextInput multiline style={styles.input} value={bodyText} onChangeText={(text)=>{setBodyText(text)}} autoFocus/>
             </View>
             <CircleButton onPress={()=>{handlePress(bodyText)}}>
                 <Icon name='check'size={40}color='#ffffff'/>
